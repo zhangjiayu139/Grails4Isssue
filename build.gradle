@@ -80,7 +80,8 @@ dependencies {
     //ehcache 缓存
     compile "org.hibernate:hibernate-ehcache"
     //audit-log
-    compile 'middolauditlog:middolAuditLog:0.1'
+//    compile 'middolauditlog:middolAuditLog:0.1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     //mySql
     runtime 'mysql:mysql-connector-java:5.1.40'
     //security rest
