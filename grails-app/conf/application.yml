@@ -1,0 +1,98 @@
+---
+grails:
+    profile: rest-api
+    cors:
+        enabled: true
+    codegen:
+        defaultPackage: app
+    databinding:
+        dateFormats:
+            - 'yyyy-MM-dd HH:mm:ss.S'
+            - "yyyy-MM-dd'T'hh:mm:ss'Z'"
+            - "yyyy-MM-dd HH:mm:ss.S z"
+            - "yyyy-MM-dd'T'HH:mm:ssX"
+            - "yyyy-MM-dd HH:mm:ss"
+            - "yyyy-MM-dd HH:mm"
+            - 'yyyy-MM-dd'
+    gorm:
+        reactor:
+            # Whether to translate GORM events into Reactor events
+            # Disabled by default for performance reasons
+            events: false
+info:
+    app:
+        name: '@info.app.name@'
+        version: '@info.app.version@'
+        grailsVersion: '@info.app.grailsVersion@'
+spring:
+    jmx:
+        unique-names: true
+    main:
+        banner-mode: "off"
+    groovy:
+        template:
+            check-template-location: false
+    devtools:
+        restart:
+            additional-exclude:
+                - '*.gsp'
+                - '**/*.gsp'
+                - '*.gson'
+                - '**/*.gson'
+                - 'logback.groovy'
+                - '*.properties'
+management:
+    endpoints:
+        enabled-by-default: false
+
+---
+grails:
+    mime:
+        disable:
+            accept:
+                header:
+                    userAgents:
+                        - Gecko
+                        - WebKit
+                        - Presto
+                        - Trident
+        types:
+            json:
+              - application/json
+              - text/json   
+            hal:
+              - application/hal+json
+              - application/hal+xml  
+            xml:
+              - text/xml
+              - application/xml                                 
+            atom: application/atom+xml
+            css: text/css
+            csv: text/csv
+            js: text/javascript
+            rss: application/rss+xml
+            text: text/plain
+            all: '*/*'            
+    urlmapping:
+        cache:
+            maxsize: 1000
+    controllers:
+        defaultScope: singleton
+        upload:
+            maxFileSize: 20971520
+            maxRequestSize: 20971520
+    converters:
+        encoding: UTF-8
+
+---
+hibernate:
+    cache:
+        queries: true
+        use_second_level_cache: true
+        use_query_cache: true
+        region.factory_class: org.hibernate.cache.ehcache.internal.EhcacheRegionFactory
+    naming_strategy: middol.base.MiddolCustomNamingStrategy
+---
+spring:
+    profiles:
+        include: dev

@@ -1,0 +1,54 @@
+server:
+    port: 9999
+---
+grails:
+    redis:
+        poolConfig:
+            maxIdle: 10
+            doesnotexist: true
+        timeout: 100000   #default in milliseconds
+        useSSL: false   #or true to use SSL
+        port: 6379
+        host: localhost
+        database: 9
+---
+dataSource:
+    pooled: true
+    jmxExport: true
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+
+environments:
+    development:
+        dataSource:
+            logSql: true
+            dbCreate: create-drop
+            url: jdbc:mysql://localhost:3306/app?createDatabaseIfNotExist=true&characterEncoding=UTF-8&useSSL=false
+    production:
+        dataSource:
+            dbCreate: update
+            url: jdbc:mysql://localhost:3306/app?createDatabaseIfNotExist=true&characterEncoding=UTF-8&useSSL=false
+            properties:
+                jmxEnabled: true
+                initialSize: 5
+                maxActive: 50
+                minIdle: 5
+                maxIdle: 25
+                maxWait: 10000
+                maxAge: 10 * 60000
+                timeBetweenEvictionRunsMillis: 5000
+                minEvictableIdleTimeMillis: 60000
+                validationQuery: "SELECT 1"
+                validationQueryTimeout: 3
+                validationInterval: 15000
+                testOnBorrow: true
+                testWhileIdle: true
+                testOnReturn: false
+                jdbcInterceptors: "ConnectionState;StatementCache(max=200)"
+                defaultTransactionIsolation: java.sql.Connection.TRANSACTION_READ_COMMITTED
+---
+upload:
+    rootDir: 'D:/fupload/'
